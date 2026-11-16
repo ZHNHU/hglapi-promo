@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HglAPI · 一把 Key 直连全球顶级 AI 模型</title>
+  <meta name="description" content="HglAPI 聚合 OpenAI GPT、Anthropic Claude、DeepSeek、智谱 GLM 四大厂商，OpenAI 接口格式完全兼容，低倍率通道、每日签到、流式秒回。" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M18 46V18h7v10h14V18h7v28h-7V34H25v12z' fill='%23fff'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- 背景特效 -->
+  <div class="bg-scene" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <canvas id="codeDust" class="bg-canvas"></canvas>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- 顶部导航 -->
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#hero">
+        <span class="brand-logo">H</span>
+        <span class="brand-name">HglAPI</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#features">核心特性</a>
+        <a href="#groups">通道倍率</a>
+        <a href="#models">模型广场</a>
+        <a href="#pricing">价格总览</a>
+        <a href="#access">快速接入</a>
+        <a href="#faq">常见问答</a>
+        <a class="nav-ext" href="https://hglapi.com" target="_blank" rel="noopener">官网 hglapi.com ↗</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="btn btn-ghost btn-sm copy-qq" type="button">
+          <svg viewBox="0 0 24 24" class="ico" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          QQ 群 <b class="qq-num">1064762302</b>
+        </button>
+        <a class="btn btn-primary btn-sm" href="https://hglapi.com" target="_blank" rel="noopener">立即开通 ↗</a>
+        <button class="nav-toggle" id="navToggle" type="button" aria-label="展开菜单">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy reveal">
+          <div class="hero-badge">
+            <span class="pulse-dot"></span>
+            注册即用 · ¥5 开通 · 签到最高得 ¥5.30/天
+          </div>
+          <h1 class="hero-title">
+            一把 Key<br />
+            <span class="grad-text">直连全球顶级 AI 模型</span>
+          </h1>
+          <p class="hero-sub">
+            HglAPI 聚合 OpenAI GPT · Anthropic Claude · DeepSeek · 智谱 GLM 四大厂商，
+            完全兼容 OpenAI 接口格式，替换一行地址即可使用。低倍率通道、流式秒回、签到回血。
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="https://hglapi.com" target="_blank" rel="noopener">
+              进入官网开通
+              <svg viewBox="0 0 24 24" class="ico" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </a>
+            <button class="btn btn-ghost copy-qq" type="button">加入交流群</button>
+          </div>
+          <a class="hero-url" href="https://hglapi.com" target="_blank" rel="noopener">
+            <span class="url-dot"></span>
+            <span class="url-text">hglapi.com</span>
+            <span class="url-go">立即进入 ↗</span>
+          </a>
+          <div class="hero-stats">
+            <div class="stat">
+              <div class="stat-num"><span class="count" data-count="30">0</span><em>+</em></div>
+              <div class="stat-label">精选模型</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num"><span class="count" data-count="4">0</span></div>
+              <div class="stat-label">大模型厂商</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num"><em>¥</em><span class="count" data-count="5">0</span></div>
+              <div class="stat-label">低门槛开通</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num"><span class="count" data-count="0.03" data-decimals="2">0</span><em>x</em></div>
+              <div class="stat-label">通道倍率低至</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-demo reveal" data-delay="150">
+          <div class="demo-card">
+            <div class="demo-head">
+              <span class="demo-dot" style="background:#ff5f57"></span>
+              <span class="demo-dot" style="background:#febc2e"></span>
+              <span class="demo-dot" style="background:#28c840"></span>
+              <span class="demo-title">playground — stream</span>
+            </div>
+            <div class="demo-body">
+              <div class="demo-msg demo-user">
+                <span class="demo-role">user</span>
+                <p id="demoQuestion">用一句话介绍你自己</p>
+              </div>
+              <div class="demo-msg demo-ai">
+                <span class="demo-role" id="demoModel">gpt-6.1-sol</span>
+                <p><span id="demoStream"></span><span class="caret"></span></p>
+              </div>
+            </div>
+            <div class="demo-foot">
+              <span class="demo-chip">SSE 流式输出中</span>
+              <span class="demo-chip demo-chip-ok">首字秒级响应</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 模型滚动条 -->
+      <div class="marquee-wrap" aria-hidden="true">
+        <div class="marquee" id="marquee">
+          <div class="marquee-track" id="marqueeTrack">
+            <span class="m-pill">gpt-6.1-sol</span>
+            <span class="m-pill">claude-opus-5-5</span>
+            <span class="m-pill">glm-5.3-flash</span>
+            <span class="m-pill">deepseek-v4.1-flash</span>
+            <span class="m-pill">gpt-6-luna</span>
+            <span class="m-pill">claude-sonnet-5</span>
+            <span class="m-pill">gpt-image-2</span>
+            <span class="m-pill">glm-5.3</span>
+            <span class="m-pill">codex-auto-review</span>
+            <span class="m-pill">deepseek-v4-pro</span>
+            <span class="m-pill">gpt-5.6-luna</span>
+            <span class="m-pill">claude-haiku-5-5</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 核心特性 -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="overline">FEATURES</span>
+          <h2>为什么选择 <span class="grad-text">HglAPI</span></h2>
+          <p>从接入到计费，把 AI 用的每一分钱都花在刀刃上</p>
+        </div>
+        <div class="feature-grid">
+          <div class="card feature-card reveal">
+            <div class="f-ico" style="--tint:#38bdf8">🔌</div>
+            <h3>OpenAI 完全兼容</h3>
+            <p>接口格式与 OpenAI 完全一致，SDK、ChatGPT 客户端、翻译插件等主流工具即插即用。</p>
+          </div>
+          <div class="card feature-card reveal" data-delay="60">
+            <div class="f-ico" style="--tint:#a78bfa">🧠</div>
+            <h3>四大厂商聚合</h3>
+            <p>GPT · Claude · DeepSeek · GLM，一把 Key 全部通用，按任务自由切换，无需多头管理。</p>
+          </div>
+          <div class="card feature-card reveal" data-delay="120">
+            <div class="f-ico" style="--tint:#34d399">⚡</div>
+            <h3>流式秒回</h3>
+            <p>全线支持 SSE 流式输出，首字秒级响应，对话与编码不再干等转圈。</p>
+          </div>
+          <div class="card feature-card reveal" data-delay="180">
+            <div class="f-ico" style="--tint:#fbbf24">💰</div>
+            <h3>低倍率通道</h3>
+            <p>分组倍率低至 <b>0.03x</b>，实际费用不到牌价一折，极致性价比跑批量任务。</p>
+          </div>
+          <div class="card feature-card reveal" data-delay="240">
+            <div class="f-ico" style="--tint:#f472b6">📅</div>
+            <h3>签到邀请回血</h3>
+            <p>每日签到最高得 <b>¥5.30</b> 额度，邀请好友双方都拿奖励，白嫖也能长期用。</p>
+          </div>
+          <div class="card feature-card reveal" data-delay="300">
+            <div class="f-ico" style="--tint:#22d3ee">🔄</div>
+            <h3>套餐 + 余额自动切换</h3>
+            <p>套餐额度优先抵扣，用完自动切换余额无缝续命，每日零点刷新，不浪费一分额度。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 通道倍率 -->
+    <section class="section" id="groups">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="overline">CHANNELS</span>
+          <h2>分组通道，<span class="grad-text">倍率自由选</span></h2>
+          <p>实际计费 = 模型牌价 × 分组倍率，按需选通道，成本自己说了算</p>
+        </div>
+        <div class="group-grid">
+          <div class="card group-card reveal">
+            <div class="g-tag" style="--tint:#38bdf8">OpenAI</div>
+            <h3>尊享通道</h3>
+            <div class="g-rate"><b>0.03</b><span>x</span></div>
+            <p>GPT 全系按 3% 计费，批量任务的性价比之王</p>
+          </div>
+          <div class="card group-card reveal" data-delay="60">
+            <div class="g-tag" style="--tint:#f472b6">Claude</div>
+            <h3>轻量通道</h3>
+            <div class="g-rate"><b>0.05</b><span>x</span></div>
+            <p>Claude 系 5% 计费，高频开发与日常对话首选</p>
+          </div>
+          <div class="card group-card reveal" data-delay="120">
+            <div class="g-tag" style="--tint:#818cf8">DeepSeek</div>
+            <h3>特惠通道</h3>
+            <div class="g-rate"><b>0.05</b><span>x</span></div>
+            <p>特殊渠道直供，中文任务的实惠之选</p>
+          </div>
+          <div class="card group-card reveal" data-delay="180">
+            <div class="g-tag" style="--tint:#f97316">Claude</div>
+            <h3>满血旗舰通道</h3>
+            <div class="g-rate"><b>0.18</b><span>x</span></div>
+            <p>完整能力无删减，复杂推理与生产环境压舱石</p>
+          </div>
+          <div class="card group-card reveal" data-delay="240">
+            <div class="g-tag" style="--tint:#34d399">智谱 GLM</div>
+            <h3>GLM 官方通道</h3>
+            <div class="g-rate"><b>0.2</b><span>x</span></div>
+            <p>国产旗舰直连，编码与 Agent 场景强劲可靠</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 模型广场 -->
+    <section class="section" id="models">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="overline">MODELS</span>
+          <h2>模型广场，<span class="grad-text">热门全覆盖</span></h2>
+          <p>30+ 模型持续上新，覆盖对话、编码、推理与生图</p>
+        </div>
+        <div class="vendor-grid">
+          <div class="card vendor-card reveal">
+            <div class="v-head" style="--tint:#38bdf8">
+              <span class="v-name">OpenAI GPT</span>
+              <span class="v-count">11 款</span>
+            </div>
+            <ul class="v-list">
+              <li><b>gpt-6.1-sol</b><span>新一代旗舰 · ¥0.432/1M 起</span></li>
+              <li><b>gpt-6-luna</b><span>超值特惠 · 输入 ¥0.022/1M</span></li>
+              <li><b>codex-auto-review</b><span>编程特化 · 工程任务首选</span></li>
+            </ul>
+          </div>
+          <div class="card vendor-card reveal" data-delay="60">
+            <div class="v-head" style="--tint:#f472b6">
+              <span class="v-name">Anthropic Claude</span>
+              <span class="v-count">9 款</span>
+            </div>
+            <ul class="v-list">
+              <li><b>claude-opus-5-5</b><span>推理旗舰 · 最强复杂任务</span></li>
+              <li><b>claude-sonnet-5</b><span>均衡主力 · 能力速度兼顾</span></li>
+              <li><b>claude-haiku-5-5</b><span>轻量极速 · ¥0.13/1M 起</span></li>
+            </ul>
+          </div>
+          <div class="card vendor-card reveal" data-delay="120">
+            <div class="v-head" style="--tint:#818cf8">
+              <span class="v-name">DeepSeek</span>
+              <span class="v-count">2 款</span>
+            </div>
+            <ul class="v-list">
+              <li><b>deepseek-v4-pro</b><span>通用旗舰 · 中文表现出色</span></li>
+              <li><b>deepseek-v4.1-flash</b><span>极速普惠 · ¥0.108/1M 起</span></li>
+            </ul>
+          </div>
+          <div class="card vendor-card reveal" data-delay="180">
+            <div class="v-head" style="--tint:#34d399">
+              <span class="v-name">智谱 GLM</span>
+              <span class="v-count">3 款</span>
+            </div>
+            <ul class="v-list">
+              <li><b>glm-5.3</b><span>深度旗舰 · Agent 与重度开发</span></li>
+              <li><b>glm-5.3-flash</b><span>秒级响应 · 高频调用首选</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="image-strip card reveal" data-delay="240">
+          <span class="image-ico">🎨</span>
+          <div class="image-info">
+            <b>生图模型 GPT-Image 系列</b>
+            <span>gpt-image-2 / 2.5-flare / 2.5-sunburst，按次计费，¥0.10 起/张</span>
+          </div>
+          <span class="image-price">¥0.10<small>/次 起</small></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 价格总览 -->
+    <section class="section" id="pricing">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="overline">PRICING</span>
+          <h2>价格总览，<span class="grad-text">透明无套路</span></h2>
+          <p>按 token 计费，单位：元 / 100 万 tokens；实际费用 = 牌价 × 分组倍率</p>
+        </div>
+        <div class="card table-card reveal">
+          <div class="table-tools">
+            <div class="search-box">
+              <svg viewBox="0 0 24 24" class="ico" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <input type="text" id="modelSearch" placeholder="搜索模型名称…" autocomplete="off" />
+            </div>
+            <div class="chip-row" id="vendorChips">
+              <button class="chip active" data-vendor="all" type="button">全部</button>
+              <button class="chip" data-vendor="openai" type="button">OpenAI GPT</button>
+              <button class="chip" data-vendor="anthropic" type="button">Claude</button>
+              <button class="chip" data-vendor="deepseek" type="button">DeepSeek</button>
+              <button class="chip" data-vendor="zhipu" type="button">智谱 GLM</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="price-table">
+              <thead>
+                <tr>
+                  <th>模型</th>
+                  <th>厂商</th>
+                  <th>输入 (¥/1M)</th>
+                  <th>输出 (¥/1M)</th>
+                </tr>
+              </thead>
+              <tbody id="priceBody"></tbody>
+            </table>
+            <div class="table-empty" id="tableEmpty" hidden>没有匹配的模型，换个关键词试试</div>
+          </div>
+          <div class="table-note">
+            <span class="tag-ladder" title="超长上下文按阶梯价计费，用量越大越划算">长上下文阶梯</span>
+            标记的模型支持阶梯计费；生图模型按次计费；价格如有调整，以控制台实时展示为准。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 快速接入 -->
+    <section class="section" id="access">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="overline">QUICK START</span>
+          <h2>三步接入，<span class="grad-text">马上开跑</span></h2>
+          <p>无需改代码框架，换一行地址就能把现有项目迁移过来</p>
+        </div>
+        <div class="steps-grid">
+          <div class="step-card reveal">
+            <span class="step-no">01</span>
+            <h3>注册账号</h3>
+            <p>打开 <a class="dom-link" href="https://hglapi.com" target="_blank" rel="noopener">hglapi.com</a>，邮箱即可注册，无需实名。</p>
+          </div>
+          <div class="step-card reveal" data-delay="80">
+            <span class="step-no">02</span>
+            <h3>充值开通</h3>
+            <p>最低 ¥5 充值开通，先领每日签到额度，创建 API 令牌。</p>
+          </div>
+          <div class="step-card reveal" data-delay="160">
+            <span class="step-no">03</span>
+            <h3>替换地址</h3>
+            <p>把 base_url 换成 <b class="mono-url">https://hglapi.com/v1</b>，模型名一填，直接开跑。</p>
+          </div>
+        </div>
+
+        <div class="card code-card reveal" data-delay="200">
+          <div class="code-head">
+            <div class="code-tabs" id="codeTabs">
+              <button class="code-tab active" data-lang="python" type="button">Python</button>
+              <button class="code-tab" data-lang="node" type="button">Node.js</button>
+              <button class="code-tab" data-lang="curl" type="button">cURL</button>
+            </div>
+            <button class="copy-btn" id="codeCopy" type="button">
+              <svg viewBox="0 0 24 24" class="ico" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              复制
+            </button>
+          </div>
+          <pre class="code-pane active" data-lang="python"><code><span class="cm"># pip install openai</span>
+<span class="kw">from</span> openai <span class="kw">import</span> OpenAI
+
+client = <span class="fn">OpenAI</span>(
+    api_key=<span class="str">"sk-你的令牌"</span>,
+    base_url=<span class="str">"https://hglapi.com/v1"</span>  <span class="cm"># 接入地址即官网域名</span>
+)
+
+stream = client.chat.completions.<span class="fn">create</span>(
+    model=<span class="str">"gpt-6.1-sol"</span>,
+    messages=[{<span class="str">"role"</span>: <span class="str">"user"</span>, <span class="str">"content"</span>: <span class="str">"你好，介绍一下你自己"</span>}],
+    stream=<span class="kw">True</span>,
+)
+<span class="kw">for</span> chunk <span class="kw">in</span> stream:
+    <span class="kw">print</span>(chunk.choices[0].delta.content <span class="kw">or</span> <span class="str">""</span>, end=<span class="str">""</span>)</code></pre>
+          <pre class="code-pane" data-lang="node" hidden><code><span class="cm">// npm i openai</span>
+<span class="kw">import</span> OpenAI <span class="kw">from</span> <span class="str">"openai"</span>;
+
+<span class="kw">const</span> client = <span class="kw">new</span> <span class="fn">OpenAI</span>({
+  apiKey: <span class="str">"sk-你的令牌"</span>,
+  baseURL: <span class="str">"https://hglapi.com/v1"</span>,  <span class="cm">// 接入地址即官网域名</span>
+});
+
+<span class="kw">const</span> stream = <span class="kw">await</span> client.chat.completions.<span class="fn">create</span>({
+  model: <span class="str">"claude-sonnet-5"</span>,
+  messages: [{ role: <span class="str">"user"</span>, content: <span class="str">"你好，介绍一下你自己"</span> }],
+  stream: <span class="kw">true</span>,
+});
+
+<span class="kw">for</span> <span class="kw">await</span> (<span class="kw">const</span> chunk <span class="kw">of</span> stream) {
+  process.stdout.write(chunk.choices[0]?.delta?.content ?? <span class="str">""</span>);
+}</code></pre>
+          <pre class="code-pane" data-lang="curl" hidden><code><span class="fn">curl</span> https://hglapi.com/v1/chat/completions \
+  -H <span class="str">"Authorization: Bearer sk-你的令牌"</span> \
+  -H <span class="str">"Content-Type: application/json"</span> \
+  -d <span class="str">'{
+    "model": "glm-5.3-flash",
+    "stream": true,
+    "messages": [{"role": "user", "content": "你好，介绍一下你自己"}]
+  }'</span></code></pre>
+          <div class="code-note">
+            <svg viewBox="0 0 24 24" class="ico" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            接入地址即 <b class="mono-url">hglapi.com</b>；注册登录控制台，创建专属令牌后即可调用。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 常见问答 -->
+    <section class="section" id="faq">
+      <div class="container container-narrow">
+        <div class="section-head reveal">
+          <span class="overline">FAQ</span>
+          <h2>常见<span class="grad-text">问答</span></h2>
+          <p>关于计费、门槛与奖励，你想知道的都在这里</p>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item reveal" open>
+            <summary>怎么计费？会不会有隐藏费用？<span class="faq-arrow"></span></summary>
+            <p>按 token 用量计费，实际费用 = 模型牌价 × 所在分组倍率，生图模型按次计费。所有价格在模型广场公开透明，没有任何隐藏费用。</p>
+          </details>
+          <details class="faq-item reveal" data-delay="60">
+            <summary>最低多少钱可以开始用？<span class="faq-arrow"></span></summary>
+            <p>注册即可使用，最低 ¥5 充值即可开通全部模型。配合每日签到额度，长期低成本使用完全没问题。</p>
+          </details>
+          <details class="faq-item reveal" data-delay="120">
+            <summary>支持流式输出吗？速度怎么样？<span class="faq-arrow"></span></summary>
+            <p>全线模型支持 SSE 流式输出，首字秒级响应。轻量模型（如 glm-5.3-flash）专为高频调用优化，适合批量任务与实时对话。</p>
+          </details>
+          <details class="faq-item reveal" data-delay="180">
+            <summary>签到和邀请奖励是怎么回事？<span class="faq-arrow"></span></summary>
+            <p>每日签到最高可获得 ¥5.30 额度；邀请好友注册，你和好友双方都能拿到奖励。额度可直接用于调用全部模型。</p>
+          </details>
+          <details class="faq-item reveal" data-delay="240">
+            <summary>套餐额度和余额是什么关系？<span class="faq-arrow"></span></summary>
+            <p>调用时优先扣除套餐额度，套餐用完后自动切换为余额扣费，无缝衔接；套餐额度每日零点刷新，避免浪费。</p>
+          </details>
+          <details class="faq-item reveal" data-delay="300">
+            <summary>现有项目迁移麻烦吗？<span class="faq-arrow"></span></summary>
+            <p>不麻烦。接口与 OpenAI 格式完全兼容，只需把 base_url 替换为 <b>https://hglapi.com/v1</b>、填入你的令牌即可，主流客户端与 SDK 均可直接使用。</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 底部 CTA -->
+    <section class="section cta-section" id="join">
+      <div class="container">
+        <div class="cta-card reveal">
+          <div class="bg-ring" aria-hidden="true"></div>
+          <h2>现在开始，<span class="grad-text">¥5 解锁全部模型</span></h2>
+          <p>注册即用 · 签到回血 · 邀请返奖，进群领新手教程</p>
+          <div class="cta-actions">
+            <a class="btn btn-primary btn-lg" href="https://hglapi.com" target="_blank" rel="noopener">进入官网 · 立即开通</a>
+            <div class="qq-card">
+              <div class="qq-label">QQ 交流群</div>
+              <div class="qq-line">
+                <b>1064762302</b>
+                <button class="copy-btn copy-qq" type="button">复制</button>
+              </div>
+              <div class="qq-tip">QQ 搜索群号加入 · 新手教程 / 问题反馈 / 活动通知</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-logo">H</span>
+        <div>
+          <b>HglAPI</b>
+          <span>稳定高效的 AI API 服务</span>
+        </div>
+      </div>
+      <nav class="footer-links">
+        <a href="#features">核心特性</a>
+        <a href="#pricing">价格总览</a>
+        <a href="#access">快速接入</a>
+        <a href="#faq">常见问答</a>
+        <a href="https://hglapi.com" target="_blank" rel="noopener">官网 hglapi.com ↗</a>
+      </nav>
+      <div class="footer-note">
+        © 2026 HglAPI · hglapi.com · 价格如有调整，以控制台实时展示为准
+      </div>
+    </div>
+  </footer>
+
+  <!-- 返回顶部 -->
+  <button class="to-top" id="toTop" type="button" aria-label="返回顶部">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <!-- 复制成功提示 -->
+  <div class="toast" id="toast">已复制到剪贴板</div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
